@@ -2,12 +2,12 @@
 import time
 import random
 
-# sys.stdin = open("input1.txt")
+# sys.stdin = open("input10.txt")
 
 
-# Point: 66
-# Submit ID: 1b3146
-class HillClimbing:
+# Point: 97
+# Submit ID: 20434e
+class Opt2:
     def __init__(self, n=None, m=None, Q=None, d=None, q=None):
         if not n:
             n, m = map(int, input().strip().split())
@@ -17,7 +17,7 @@ class HillClimbing:
             d = [[int(j) for j in input().strip().split()] for i in range(m + 1)]
             q = [0] + [int(i) for i in input().strip().split()]
 
-        self.time_limit = 100
+        self.time_limit = 5 * 60
         self.n = n
         self.m = m
         self.Q = Q
@@ -53,35 +53,26 @@ class HillClimbing:
                 return False
         return True
 
-    def tsp_by_hill_climbing(self):
+    def tsp_by_opt_2(self):
         cur_state = [i for i in range(1, self.m + 1)]
         random.shuffle(cur_state)
         cur_dist = self.dist_of_path(cur_state)
         cur_state = [0] + cur_state + [0]
 
         def swap(state, idx1, idx2):
-            temp = state[idx1]
-            state[idx1] = state[idx2]
-            state[idx2] = temp
+            while idx1 < idx2:
+                temp = state[idx1]
+                state[idx1] = state[idx2]
+                state[idx2] = temp
+                idx1 += 1
+                idx2 -= 1
 
         def dist_after_swap(idx1, idx2):
-            node1 = cur_state[idx1]
-            node2 = cur_state[idx2]
-            pre_node1 = cur_state[idx1 - 1]
-            pre_node2 = cur_state[idx2 - 1]
-            next_node1 = cur_state[idx1 + 1]
-            next_node2 = cur_state[idx2 + 1]
-
-            if idx2 == idx1 - 1:
-                return (cur_dist -
-                        (self.d[next_node1][node1] + self.d[pre_node2][node2]) +
-                        (self.d[next_node1][node2] + self.d[pre_node2][node1]))
-
-            return (cur_dist -
-                    (self.d[pre_node1][node1] + self.d[next_node1][node1] +
-                     self.d[pre_node2][node2] + self.d[next_node2][node2]) +
-                    (self.d[pre_node1][node2] + self.d[next_node1][node2] +
-                     self.d[pre_node2][node1] + self.d[next_node2][node1]))
+            p = cur_state[idx1]
+            q = cur_state[idx2]
+            pre_p = cur_state[idx1 - 1]
+            next_q = cur_state[idx2 + 1]
+            return cur_dist - self.d[pre_p][p] - self.d[q][next_q] + self.d[pre_p][q] + self.d[p][next_q]
 
         def get_neighbor():
             nonlocal cur_state, cur_dist
@@ -89,11 +80,10 @@ class HillClimbing:
 
             for i in range(1, self.m):
                 for j in range(1, i):
-                    new_dist = dist_after_swap(i, j)
+                    new_dist = dist_after_swap(j, i)
                     if neighbor[0] == -1 and new_dist < cur_dist or new_dist < neighbor[0]:
-                        new_state = cur_state[:]
-                        swap(new_state, i, j)
-                        neighbor = (new_dist, new_state)
+                        swap(cur_state, j, i)
+                        neighbor = (new_dist, cur_state)
 
             return neighbor
 
@@ -116,7 +106,7 @@ class HillClimbing:
 
     # Start from optimal solution of TSP, cutting nodes until convergent
     def solve(self):
-        cur_dist, cur_state = self.tsp_by_hill_climbing()
+        cur_dist, cur_state = self.tsp_by_opt_2()
         cur_state = [0] + cur_state + [0]
         cur_load = self.loaded_list(cur_state)
 
@@ -165,5 +155,5 @@ class HillClimbing:
         return cur_dist, cur_state, cur_load
 
 
-solver = HillClimbing()
+solver = Opt2()
 solver.solve()

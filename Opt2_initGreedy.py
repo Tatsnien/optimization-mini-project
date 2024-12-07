@@ -75,7 +75,6 @@ class Opt2:
     def tsp_by_opt_2(self):
         cur_dist, cur_state = self.tsp_by_greedy()
         cur_state = [0] + cur_state + [0]
-        cnt = 20
 
         def swap(state, idx1, idx2):
             while idx1 < idx2:
