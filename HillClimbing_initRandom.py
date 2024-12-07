@@ -2,7 +2,7 @@
 import time
 import random
 
-# sys.stdin = open("input10.txt")
+# sys.stdin = open("input1.txt")
 
 
 # Point: 48
@@ -17,7 +17,7 @@ class HillClimbing:
             d = [[int(j) for j in input().strip().split()] for i in range(m + 1)]
             q = [0] + [int(i) for i in input().strip().split()]
 
-        self.time_limit = 5 * 60
+        self.time_limit = 100
         self.n = n
         self.m = m
         self.Q = Q
