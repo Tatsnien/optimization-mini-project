@@ -74,7 +74,6 @@ class HillClimbing:
     def tsp_by_hill_climbing(self):
         cur_dist, cur_state = self.tsp_by_greedy()
         cur_state = [0] + cur_state + [0]
-        cnt = 20
 
         def swap(state, idx1, idx2):
             temp = state[idx1]

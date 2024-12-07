@@ -76,7 +76,6 @@ class TabuSearch:
         cur_state = [0] + cur_state + [0]
         tabu = []
         tabu_max = 1000
-        cnt = 20
 
         def swap(state, idx1, idx2):
             temp = state[idx1]
