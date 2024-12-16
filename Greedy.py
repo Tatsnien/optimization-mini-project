@@ -1,6 +1,10 @@
 #PYTHON 
 import random
 
+# Point: 80
+# Submit ID: ab0ae6
+
+
 # Read input values
 N, M = map(int, input().split())
 Q = [list(map(int, input().split())) for _ in range(N)]
