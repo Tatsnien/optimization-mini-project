@@ -5,6 +5,7 @@ import math
 # Point: 59
 # Submit ID: 3c4cb9
 
+
 # Read input values
 N, M = map(int, input().split())
 Q = [list(map(int, input().split())) for _ in range(N)]
@@ -12,10 +13,11 @@ d = [list(map(int, input().split())) for _ in range(M + 1)]
 q = list(map(int, input().split()))
 
 # Initialize variables
-def initialize_path(m):
-    path = list(range(m))
-    random.shuffle(path)
-    return path
+def initialize_greedy_path():
+    # Create a list of shelves sorted by the total quantity needed
+    total_quantities = [sum(Q[i][j] for i in range(N)) for j in range(M)]
+    sorted_shelves = sorted(range(M), key=lambda x: -total_quantities[x])
+    return sorted_shelves
 
 def compute_total_distance_and_quantities(path):
     total_distance = d[0][path[0] + 1]  # Distance from door to first shelf
@@ -40,7 +42,7 @@ def is_better(old_cost, new_cost, temperature):
         return math.exp((old_cost - new_cost) / temperature) > random.random()
 
 def simulated_annealing():
-    current_path = initialize_path(M)
+    current_path = initialize_greedy_path()  # Use the greedy initial path
     current_cost, current_quantities = compute_total_distance_and_quantities(current_path)
     best_path = current_path[:]
     best_cost = current_cost
@@ -79,3 +81,4 @@ best_path, best_cost = simulated_annealing()
 # Prepare output
 print(len(best_path))
 print(" ".join(str(x + 1) for x in best_path))  # Convert to 1-based index for output
+
