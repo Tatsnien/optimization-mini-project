@@ -2,8 +2,8 @@
 import random
 import math
 
-# Point: 59
-# Submit ID: 3c4cb9
+# Point: 70
+# Submit ID: 90ea9e
 
 
 # Read input values
