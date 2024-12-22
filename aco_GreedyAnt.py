@@ -1,7 +1,7 @@
 import random
 
-# Point: 95
-# Submit ID: 51098e
+# Point: 98
+# Submit ID: b46e65
 
 class ACO:
     def __init__(self, costs, Q, q, nbAnts: int, generations: int, alpha: float = 1, beta: float = 2, p: float = 0.1):
