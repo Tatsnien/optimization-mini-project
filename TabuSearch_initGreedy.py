@@ -75,7 +75,7 @@ class TabuSearch:
         cur_dist, cur_state = self.tsp_by_greedy()
         cur_state = [0] + cur_state + [0]
         tabu = []
-        tabu_max = 1000
+        tabu_max = 10 ** 6
 
         def swap(state, idx1, idx2):
             temp = state[idx1]
@@ -189,4 +189,4 @@ class TabuSearch:
 
 
 solver = TabuSearch()
-solver.solve()
+result = solver.solve()

@@ -7,7 +7,7 @@ from ortools.constraint_solver import routing_enums_pb2
 
 # Point: 100
 # Submit ID: f3828e
-class HillClimbing:
+class Ortools:
     def __init__(self, n=None, m=None, Q=None, d=None, q=None):
         if not n:
             n, m = map(int, input().strip().split())
@@ -132,5 +132,5 @@ class HillClimbing:
         return cur_dist, cur_state, cur_load
 
 
-solver = HillClimbing()
-solver.solve()
+solver = Ortools()
+result = solver.solve()

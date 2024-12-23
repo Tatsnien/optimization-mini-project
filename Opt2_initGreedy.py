@@ -168,9 +168,10 @@ class Opt2:
             if not has_next_state():
                 break
 
+        cur_dist = self.dist_of_path(cur_state)
         self.print_solution(cur_state)
         return cur_dist, cur_state, cur_load
 
 
 solver = Opt2()
-solver.solve()
+result = solver.solve()

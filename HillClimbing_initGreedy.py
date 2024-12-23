@@ -184,4 +184,4 @@ class HillClimbing:
 
 
 solver = HillClimbing()
-solver.solve()
+result = solver.solve()
